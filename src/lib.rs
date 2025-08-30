@@ -763,7 +763,6 @@ mod tests {
 			<sp_runtime::OpaqueExtrinsic as Decode>::decode(&mut &*encoded).unwrap();
 	}
 
-
 	#[test]
 	fn mint_balance_works() {
 		/*
@@ -779,8 +778,6 @@ mod tests {
 		state.execute_with(|| assert_eq!(Runtime::get_state::<u32>(&balance_map_key(alice)), Some(1000)));
 		*/
 	}
-
-
 
 	#[test]
 	fn transfer_balance_works() {
