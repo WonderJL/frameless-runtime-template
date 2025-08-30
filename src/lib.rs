@@ -55,7 +55,7 @@
 //! RUST_LOG=frameless=info cargo build --release
 //! # pass it to the node
 //! RUST_LOG=frameless=debug
-//! pba-omni-node
+//! pba-omni-node \
 //! 	# the path to the runtime.
 //! 	--runtime ./target/release/wbuild/runtime/runtime.wasm \
 //! 	# ensures we spin up a new database each time.
@@ -95,7 +95,7 @@
 //!
 //! First, install the right version of the chain-spec builder:
 //! ```text
-//! cargo install staging-chain-spec-builder
+//! cargo install staging-chain-spec-builder --locked
 //! ```
 //!
 //! ### Understanding Chain Specs
