@@ -100,7 +100,7 @@
 //!
 //! ### Understanding Chain Specs
 //!
-//! Let's quickly explore how the chian-spec builder works:
+//! Let's quickly explore how the chain-spec builder works:
 //!
 //! * The chain spec is a JSON file describing what the initial specification of the chain is.
 //! * It is an important feature of the omni-node-driven future of Polkadot.
