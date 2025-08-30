@@ -215,6 +215,10 @@ const HEADER_KEY: &[u8] = b"header";
 /// Should always remain in state at the end of the block, and be flushed at the beginning of the
 /// next block.
 const EXTRINSICS_KEY: &[u8] = b"extrinsics";
+/// Key used to store the runtime code for upgrades.
+///
+/// Hex: 0x3a636f6465
+const CODE_KEY: &[u8] = b":code";
 
 /// The block number type. You should not change this.
 type BlockNumber = u32;
@@ -385,8 +389,15 @@ impl Runtime {
 	// - dispatch to Call
 	// - note extrinsic
 	pub(crate) fn do_apply_extrinsic(ext: <Block as BlockT>::Extrinsic) -> ApplyExtrinsicResult {
-		let dispatch_outcome = match ext.clone().function {
-			_ => Ok(()),
+		let dispatch_outcome = match ext.clone().function {	
+			Call::SetValue { value } => {
+				Self::mutate_state::<u32>(VALUE_KEY, |current| *current = value);
+				Ok(())
+			},
+			Call::UpgradeCode { code } => {
+				sp_io::storage::set(&CODE_KEY, &code);
+				Ok(())
+			},
 		};
 
 		log::debug!(target: LOG_TARGET, "dispatched {:?}, outcome = {:?}", ext, dispatch_outcome);
